@@ -105,7 +105,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Implements a parameter directive (e.g. #@!puppet.type.param) for documenting Puppet resource types.</p>
+    <p>Implements a parameter directive (e.g. #@!puppet.type.property) for documenting Puppet resource types.</p>
 
 
   </div>
@@ -226,7 +226,7 @@
       <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/tags/property_directive.rb', line 21</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_register!'>register!</span>
-  <span class='const'>YARD</span><span class='op'>::</span><span class='const'>Tags</span><span class='op'>::</span><span class='const'>Library</span><span class='period'>.</span><span class='id identifier rubyid_define_directive'>define_directive</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>puppet.type.property</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='symbol'>:with_types_and_name</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span>
+  <span class='const'>YARD</span><span class='op'>::</span><span class='const'>Tags</span><span class='op'>::</span><span class='const'>Library</span><span class='period'>.</span><span class='id identifier rubyid_define_directive'>define_directive</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>puppet.type.property</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:with_types_and_name</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -282,7 +282,7 @@
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_object'>object</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:add_property</span><span class='rparen'>)</span>
   <span class='comment'># Add a property to the resource
-</span>  <span class='id identifier rubyid_property'>property</span> <span class='op'>=</span> <span class='const'>PuppetStrings</span><span class='op'>::</span><span class='const'>Yard</span><span class='op'>::</span><span class='const'>CodeObjects</span><span class='op'>::</span><span class='const'>Type</span><span class='op'>::</span><span class='const'>Parameter</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_tag'>tag</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_tag'>tag</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span>
+</span>  <span class='id identifier rubyid_property'>property</span> <span class='op'>=</span> <span class='const'>PuppetStrings</span><span class='op'>::</span><span class='const'>Yard</span><span class='op'>::</span><span class='const'>CodeObjects</span><span class='op'>::</span><span class='const'>Type</span><span class='op'>::</span><span class='const'>Property</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_tag'>tag</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_tag'>tag</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_tag'>tag</span><span class='period'>.</span><span class='id identifier rubyid_types'>types</span>
     <span class='id identifier rubyid_tag'>tag</span><span class='period'>.</span><span class='id identifier rubyid_types'>types</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_value'>value</span><span class='op'>|</span>
       <span class='id identifier rubyid_property'>property</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
@@ -300,9 +300,9 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Sep 11 14:30:27 2016 by
+  Generated on Mon Sep 19 10:17:03 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.5 (ruby-2.2.5).
+  0.9.5 (ruby-1.9.3).
 </div>
 
     </div>

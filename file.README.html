@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="US-ASCII">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>
   File: README
@@ -63,7 +63,11 @@
 
 <p><a href="https://travis-ci.org/puppetlabs/puppet-strings"><img src="https://travis-ci.org/puppetlabs/puppet-strings.png?branch=master" alt="Build Status"></a> <a href="https://badge.fury.io/rb/puppet-strings"><img src="https://badge.fury.io/rb/puppet-strings.svg" alt="Gem Version"></a></p>
 
-<p>A Puppet Face and plugin built on the <a href="http://yardoc.org/">YARD Documentation Tool</a> and the Puppet 4 Parser. It is uses YARD and the Puppet Parser to generate HTML documentation about Puppet code and Puppet extensions written in Ruby. It will eventually replace the <code>puppet doc</code> command once feature parity has been achieved.</p>
+<p>A Puppet command built on <a href="http://yardoc.org/">YARD</a>.</p>
+
+<p>Puppet Strings generates HTML documentation for Puppet extensions written in Puppet and Ruby.</p>
+
+<p>This tool will eventually place the existing <code>puppet doc</code> command once feature parity has been achieved.</p>
 
 <table><thead>
 <tr>
@@ -77,7 +81,7 @@
 </tr>
 <tr>
 <td><em>Issues</em></td>
-<td><a href="https://tickets.puppetlabs.com/browse/PDOC">Puppet Labs&#39; JIRA Tracker</a></td>
+<td><a href="https://tickets.puppetlabs.com/browse/PDOC">Puppet JIRA Tracker</a></td>
 </tr>
 <tr>
 <td><em>License</em></td>
@@ -93,21 +97,19 @@
 </tr>
 </tbody></table>
 
-<h2>Installation</h2>
+<h2>Requirements</h2>
 
 <p>In order to run strings you need to have the following software installed:</p>
 
 <ul>
 <li>Ruby 1.9.3 or newer</li>
 <li>Puppet 3.7 or newer</li>
-<li>The YARD RubyGem</li>
+<li>The <code>yard</code> Ruby gem</li>
 </ul>
 
 <h2>Installing the YARD Gem</h2>
 
-<p><strong>Installing the YARD Gem with Puppet</strong></p>
-
-<p>The easiest way to install the YARD gem is with Puppet itself.</p>
+<p>The easiest way to install the <code>yard</code> gem is with Puppet itself:</p>
 
 <p>For Puppet 4.x:</p>
 
@@ -119,9 +121,11 @@
 <pre class="code ruby"><code class="ruby">$ puppet resource package yard provider=gem
 </code></pre>
 
-<h2>Installing Strings Itself</h2>
+<h2>Installing Puppet Strings</h2>
 
-<p>Strings can be installed using the <a href="https://rubygems.org/gems/puppet-strings">puppet-strings RubyGem</a>. To ensure it is installed in right place, it is best to install it using Puppet.</p>
+<p>Strings can be installed using the <a href="https://rubygems.org/gems/puppet-strings">puppet-strings</a> gem.</p>
+
+<p>To ensure it is installed in right place, it is best to install it using Puppet:</p>
 
 <p>For Puppet 4.x:</p>
 
@@ -142,114 +146,227 @@ $ puppet strings
 </code></pre>
 
 <p>This processes <code>README</code> and all Puppet and Ruby source files under the <code>./manifests/</code>, <code>./functions/</code>, and <code>./lib/</code>
-directories by default.</p>
+directories by default and creates HTML documentation under the <code>./doc/</code> directory.</p>
 
 <p>To document specific files:</p>
 
-<pre class="code ruby"><code class="ruby">$ puppet strings first.pp second.pp ...
+<pre class="code ruby"><code class="ruby">$ puppet strings generate first.pp second.pp ...
 </code></pre>
 
 <p>To document specific directories:</p>
 
-<pre class="code ruby"><code class="ruby">$ puppet strings &#39;modules/foo/lib/**/*.rb&#39; &#39;modules/foo/manifests/**/*.pp&#39; &#39;modules/foo/functions/**/*.pp&#39; ...
+<pre class="code ruby"><code class="ruby">$ puppet strings generate 'modules/foo/lib/**/*.rb' 'modules/foo/manifests/**/*.pp' 'modules/foo/functions/**/*.pp' ...
 </code></pre>
 
-<p>Strings can also emit the generated documentation as JSON:</p>
+<p>Strings can emit JSON documenting the Puppet extensions:</p>
 
-<pre class="code ruby"><code class="ruby">$ puppet strings generate manifest.pp --emit-json documentation.json
+<pre class="code ruby"><code class="ruby">$ puppet strings generate --emit-json documentation.json
 </code></pre>
 
 <p>It can also print the JSON to stdout:</p>
 
-<pre class="code ruby"><code class="ruby">$ puppet strings generate manifest.pp --emit-json-stdout
+<pre class="code ruby"><code class="ruby">$ puppet strings generate --emit-json-stdout
 </code></pre>
 
-<p>The schema for the JSON which Strings emits is <a href="https://github.com/puppetlabs/puppet-strings/blob/master/json_dom.md">documented here</a>.</p>
-
-<p>Processing is delegated to the <code>yard</code> tool so some options listed in <code>yard help doc</code> are available.  However, Puppet Faces do not support passing arbitrary options through a face so these options must be specified in a <code>.yardopts</code> file.</p>
+<p>The schema for the JSON output is <a href="https://github.com/puppetlabs/puppet-strings/blob/master/JSON.md">documented here</a>.</p>
 
 <p>In addition to generating a directory full of HTML, you can also serve up documentation for all your modules using the <code>server</code> action:</p>
 
 <pre class="code ruby"><code class="ruby">$ puppet strings server
 </code></pre>
 
-<h2>Writing Compatible Documentation</h2>
+<h2>YARD Options</h2>
 
-<p>Since the strings module is built around YARD, a few different comment formats can be used.  YARD can work with RDoc, meaning it is backwards compatible with previously documented modules.  Feel free to try out strings with RDoc, but we are planning to move to Markdown as the standard.  You can configure which you would like YARD to use by adding a <code>.yardopts</code> file to the root of your module directory which specifies the desired format:</p>
+<p>YARD options (see <code>yard help doc</code>) are supported in a <code>.yardopts</code> file in the same directory where <code>puppet strings</code> is run.</p>
 
-<pre class="code ruby"><code class="ruby">--markup markdown
+<p>Puppet Strings automatically sets the <code>markup</code> option to <code>markdown</code>, allowing your documentation strings to be in Markdown format.</p>
+
+<h2>Documenting Puppet Extensions</h2>
+
+<h3>Puppet Classes / Defined Types</h3>
+
+<p>To document Puppet classes and defined types, use a YARD docstring before the class or defined type definition:</p>
+
+<pre class="code puppet"><code class="puppet"># An example class.
+#
+# This is an example of how to document a Puppet class
+#
+# @example Declaring the class
+#   include example
+#
+# @param first The first parameter for this class
+# @param second The second paramter for this class
+class example_class(
+  String $first  = $example::params::first_arg,
+  Integer $second = $example::params::second_arg,
+) inherits example::params {
+  # ...
+}
+
+# An example defined type.
+#
+# This is an example of how to document a defined type.
+# @param ports The array of port numbers to use.
+define example_type(
+   Array[Integer] $ports = []
+) {
+  # ...
+}
 </code></pre>
 
-<p>While we have yet to decide exactly how documentation should work in the future, here are some very basic examples to get you started using the strings module. These are very much subject to change as we continue to work out a style guide.</p>
+<p><strong><em>Note: unlike Ruby, Puppet 4.x is a typed language; Puppet Strings will automatically use the parameter type information to 
+document the parameter types.  A warning will be emitted if you document a parameter&#39;s type for a parameter that has a Puppet type specifier.</em></strong></p>
+
+<h3>Resource Types</h3>
+
+<p>To document custom resource types and their parameters/properties, use the <code>desc</code> method or assign a value to the <code>doc</code> attribute:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Puppet</span><span class='op'>::</span><span class='const'>Type</span><span class='period'>.</span><span class='id identifier rubyid_newtype'>newtype</span><span class='lparen'>(</span><span class='symbol'>:example</span><span class='rparen'>)</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_desc'>desc</span> <span class='heredoc_beg'>&lt;&lt;-DESC</span>
+<span class='tstring_content'>An example resource type.
+@example Using the type.
+  example { foo:
+    param =&gt; 'hi'
+  }
+</span><span class='heredoc_end'>DESC
+</span>
+  <span class='id identifier rubyid_newparam'>newparam</span><span class='lparen'>(</span><span class='symbol'>:param</span><span class='rparen'>)</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_desc'>desc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>An example parameter.</span><span class='tstring_end'>'</span></span>
+    <span class='comment'># ...
+</span>  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_newproperty'>newproperty</span><span class='lparen'>(</span><span class='symbol'>:prop</span><span class='rparen'>)</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_desc'>desc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>An example property.</span><span class='tstring_end'>'</span></span>
+    <span class='comment'>#...
+</span>  <span class='kw'>end</span>
+
+  <span class='comment'># ...  
+</span><span class='kw'>end</span>
+</code></pre>
+
+<p>Puppet Strings documents this way to preserve backwards compatibility with <code>puppet doc</code> and existing resource types.</p>
+
+<p><strong><em>Note: Puppet Strings does not evaluate your Ruby code, so only certain static expressions are supported.</em></strong></p>
+
+<p>To document parameters and properties that are dynamically created, use the <code>#@!puppet.type.param</code> and <code>#@!puppet.type.property</code>
+directives before the <code>newtype</code> call:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='comment'># @!puppet.type.param [value1, value2, value3] my_param Documentation for a dynamic parameter.
+</span><span class='comment'># @!puppet.type.property [foo, bar, baz] my_prop Documentation for a dynamic property.
+</span><span class='const'>Puppet</span><span class='op'>::</span><span class='const'>Type</span><span class='period'>.</span><span class='id identifier rubyid_newtype'>newtype</span><span class='lparen'>(</span><span class='symbol'>:example</span><span class='rparen'>)</span> <span class='kw'>do</span>
+  <span class='comment'>#...
+</span><span class='kw'>end</span>
+</code></pre>
+
+<h3>Providers</h3>
+
+<p>To document providers, use the <code>desc</code> method or assign a value to the <code>doc</code> attribute:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Puppet</span><span class='op'>::</span><span class='const'>Type</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span><span class='lparen'>(</span><span class='symbol'>:example</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_provide'>provide</span> <span class='symbol'>:platform</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_desc'>desc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>An example provider.</span><span class='tstring_end'>'</span></span>
+
+  <span class='comment'># ...
+</span><span class='kw'>end</span>
+</code></pre>
+
+<p>Puppet Strings documents this way to preserve backwards compatibility with <code>puppet doc</code> and existing resource types.</p>
+
+<p><strong><em>Note: Puppet Strings does not evaluate your Ruby code, so only certain static expressions are supported.</em></strong></p>
 
 <h3>Functions</h3>
 
-<p>Here&#39;s an example of how you might document a 4x function:</p>
+<p>Puppet Strings supports three different ways of defining a function in Puppet: with the Puppet 3.x API, Puppet 4.X API,
+and in the Puppet language itself.</p>
 
-<pre class="code ruby"><code class="ruby"><span class='comment'># When given two numbers, returns the one that is larger.
-</span><span class='comment'># You could have a several line description here if you wanted,
-</span><span class='comment'># but I don&#39;t have much to say about this function.
-</span><span class='comment'>#
-</span><span class='comment'># @example using two integers
-</span><span class='comment'>#   $bigger_int = max(int_one, int_two)
-</span><span class='comment'>#
-</span><span class='comment'># @return [Integer] the larger of the two parameters
-</span><span class='comment'>#
-</span><span class='comment'># @param num_a [Integer] the first number to be compared
-</span><span class='comment'># @param num_b [Integer] the second number to be compared
-</span><span class='const'>Puppet</span><span class='op'>::</span><span class='const'>Functions</span><span class='period'>.</span><span class='id identifier rubyid_create_function'>create_function</span><span class='lparen'>(</span><span class='symbol'>:max</span><span class='rparen'>)</span> <span class='kw'>do</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_max'>max</span><span class='lparen'>(</span><span class='id identifier rubyid_num_a'>num_a</span><span class='comma'>,</span> <span class='id identifier rubyid_num_b'>num_b</span><span class='rparen'>)</span>
-    <span class='id identifier rubyid_num_a'>num_a</span> <span class='op'>&gt;=</span> <span class='id identifier rubyid_num_b'>num_b</span> <span class='op'>?</span> <span class='id identifier rubyid_num_a'>num_a</span> <span class='op'>:</span> <span class='id identifier rubyid_num_b'>num_b</span>
+<h4>Puppet 3.x Functions</h4>
+
+<p>To document a function in the Puppet 3.x API, use the <code>doc</code> option to <code>newfunction</code>:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Puppet</span><span class='op'>::</span><span class='const'>Parser</span><span class='op'>::</span><span class='const'>Functions</span><span class='period'>.</span><span class='id identifier rubyid_newfunction'>newfunction</span><span class='lparen'>(</span><span class='symbol'>:example</span><span class='comma'>,</span> <span class='label'>doc:</span> <span class='heredoc_beg'>&lt;&lt;-DOC</span>
+<span class='tstring_content'>Documentation for an example 3.x function.
+@param [String] param1 The first parameter.
+@param [Integer] param2 The second parameter.
+@return [Undef]
+@example Calling the function.
+  example('hi', 10)
+</span><span class='heredoc_end'>DOC
+</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='op'>|</span>
+  <span class='comment'>#...
+</span><span class='kw'>end</span>
+</code></pre>
+
+<p><strong><em>Note: if parameter types are omitted, a default of the <code>Any</code> Puppet type will be used.</em></strong></p>
+
+<h4>Puppet 4.x Functions</h4>
+
+<p>To document a function in the Puppet 4.x API, use a YARD docstring before the <code>create_function</code> call and any <code>dispatch</code>
+calls:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='comment'># An example 4.x function.
+</span><span class='const'>Puppet</span><span class='op'>::</span><span class='const'>Functions</span><span class='period'>.</span><span class='id identifier rubyid_create_function'>create_function</span><span class='lparen'>(</span><span class='symbol'>:example</span><span class='rparen'>)</span> <span class='kw'>do</span>
+  <span class='comment'># @param first The first parameter.
+</span>  <span class='comment'># @param second The second parameter.
+</span>  <span class='comment'># @return [String] Returns a string.
+</span>  <span class='comment'># @example Calling the function
+</span>  <span class='comment'>#   example('hi', 10)
+</span>  <span class='id identifier rubyid_dispatch'>dispatch</span> <span class='symbol'>:example</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_param'>param</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>String</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:first</span>
+    <span class='id identifier rubyid_param'>param</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Integer</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:second</span>
   <span class='kw'>end</span>
-<span class='kw'>end</span>
-</code></pre>
 
-<h3>Classes / Defined Types</h3>
-
-<p>Here&#39;s an example of how you might document a class:</p>
-
-<pre class="code puppet"><code class="puppet"># This class is meant to serve as an example of how one might
-# want to document a manifest in a way that is compatible.
-# with the strings module
-#
-# @example when declaring the example class
-#   include example
-#
-# @param first_arg The first parameter for this class
-# @param second_arg The second paramter for this class
-class example (
-  $first_arg  = $example::params::first_arg,
-  $second_arg = $exampe::params::second_arg,
-) { }
-</code></pre>
-
-<h3>Types and Providers</h3>
-
-<p>Strings will automatically extract the <code>@doc</code> provider docstring and any <code>desc</code> parameter/property docstrings.</p>
-
-<p>Sometimes however, Puppet types use metaprogramming to create parameters and methods automatically. In those cases Strings will not be able to document them automatically (Strings doesn&#39;t execute the code that would generate those parameters), so you will need to provide hints on how to document your code. To document a parameter which is automatically created you must use the special directive <code>@!puppet.type.param</code> or <code>@!puppet.type.property</code> which may take types, the parameter or property name, and a description.</p>
-
-<pre class="code ruby"><code class="ruby"><span class='comment'># @!puppet.type.param my_parameter This parameter needs to be explicitly
-</span><span class='comment'># documented as it is generated by mk_resource_methods
-</span><span class='const'>Puppet</span><span class='op'>::</span><span class='const'>Type</span><span class='period'>.</span><span class='id identifier rubyid_newtype'>newtype</span><span class='lparen'>(</span><span class='symbol'>:minifile</span><span class='rparen'>)</span> <span class='kw'>do</span>
-
-  <span class='ivar'>@doc</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Manages files, including their content, ownership, and permissions.
-    The provider can manage symbolic links.</span><span class='tstring_end'>&quot;</span></span>
-
-  <span class='comment'># This function does some metaprogramming on the new type.
-</span>  <span class='id identifier rubyid_mk_resource_methods'>mk_resource_methods</span>
-
-  <span class='id identifier rubyid_newparam'>newparam</span><span class='lparen'>(</span><span class='symbol'>:path</span><span class='rparen'>)</span> <span class='kw'>do</span>
-    <span class='id identifier rubyid_desc'>desc</span> <span class='heredoc_beg'>&lt;&lt;-&#39;EOT&#39;</span>
-<span class='tstring_content'>      The path to the file to manage.  Must be fully qualified.
-</span><span class='heredoc_end'>    EOT
-</span>    <span class='comment'># ... do stuff here
-</span>  <span class='kw'>end</span>
   <span class='comment'># ...
 </span><span class='kw'>end</span>
-
-
 </code></pre>
+
+<p><strong><em>Note: Puppet Strings will automatically use the parameter type information from the <code>dispatch</code> block to document 
+the parameter types. Only document your parameter types when the Puppet 4.x function contains no <code>dispatch</code> calls.</em></strong></p>
+
+<p>If the Puppet 4.x function contains multiple <code>dispatch</code> calls, Puppet Strings will automatically create <code>overload</code> tags
+to describe the function&#39;s overloads:</p>
+
+<pre class="code ruby"><code class="ruby"># An example 4.x function.
+Puppet::Functions.create_function(:example) do
+  # Overload by string.
+  # @param first The first parameter.
+  # @return [String] Returns a string.
+  # @example Calling the function
+  #   example('hi')
+  dispatch :example_string do
+    param 'String', :first
+  end
+
+  # Overload by integer.
+  # @param first The first parameter.
+  # @return [Integer] Returns an integer.
+  # @example Calling the function
+  #   example(10)
+  dispatch :example_integer do
+    param 'Integer', :first
+  end
+
+  # ...
+</code></pre>
+
+<p>The resulting HTML for this example function will document both <code>example(String $first)</code> and <code>example(Integer $first)</code>. </p>
+
+<h4>Puppet Language Functions</h4>
+
+<p>To document Puppet functions written in the Puppet language, use a YARD docstring before the function definition:</p>
+
+<pre class="code puppet"><code class="puppet"># An example function written in Pupppet.
+# @param name The name to say hello to.
+# @return [String] Returns a string.
+# @example Calling the function
+#   example('world')
+function example(String $name) {
+  &quot;hello $name&quot;
+}
+</code></pre>
+
+<p><strong><em>Note: Puppet Strings will automatically use the parameter type information from the function&#39;s parameter list to document 
+the parameter types.</em></strong></p>
+
+<h2>Additional Resources</h2>
 
 <p>Here are a few other good resources for getting started with documentation:</p>
 
@@ -261,51 +378,61 @@ class example (
 
 <h2>Rake Tasks</h2>
 
-<p>Puppet Strings comes with two rake tasks: <code>strings:generate</code> and <code>strings:gh_pages</code> available in <code>puppet-strings/rake_tasks</code>.</p>
+<p>Puppet Strings comes with two rake tasks: <code>strings:generate</code> and <code>strings:gh_pages:update</code> available in <code>puppet-strings/tasks</code>.</p>
 
 <p>Add the following to your Gemfile to use <code>puppet-strings</code>:</p>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>puppet-strings</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='symbol'>:git</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>https://github.com/puppetlabs/puppet-strings.git</span><span class='tstring_end'>&#39;</span></span>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>puppet-strings</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:git</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>https://github.com/puppetlabs/puppet-strings.git</span><span class='tstring_end'>'</span></span>
 </code></pre>
 
 <p>In your <code>Rakefile</code>, add the following to use the <code>puppet-strings</code> tasks:</p>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>puppet-strings/rake_tasks</span><span class='tstring_end'>&#39;</span></span>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>puppet-strings/tasks</span><span class='tstring_end'>'</span></span>
 </code></pre>
 
-<p>In addition to generating the usual &#39;doc&#39; directory of HTML documentation, the <code>strings:generate</code> rake task will also drop a strings.json file containing a JSON representation of the module into the directory the rake task was run from.</p>
+<p>The <code>strings:generate</code> task can be used to generate documentation:</p>
 
-<p>The task <code>strings:generate</code> which is provided by including <code>puppet-strings/rake_tasks</code> will scan the manifests and lib directory from your single module. If you need to document a complete, or part of a, puppet tree, you can use the <code>PuppetStrings::RakeTasks::Generate</code> task. This rake task will by default overwrite strings:generate unless you specify a custom name. See the example below on how you can use it and which options it supports.</p>
-
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>puppet-strings/rake_tasks/generate</span><span class='tstring_end'>&#39;</span></span>
-
-<span class='const'>PuppetStrings</span><span class='op'>::</span><span class='const'>RakeTasks</span><span class='op'>::</span><span class='const'>Generate</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='symbol'>:documentation</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_task'>task</span><span class='op'>|</span>
-  <span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_paths'>paths</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>site/roles</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>site/profiles</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>modules/internal</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
-  <span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_excludes'>excludes</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/vendor/</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/example/</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
-  <span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span> <span class='comment'># disables the strings.json output
-</span>  <span class='comment'># module_resourcefiles are the patterns of included files. Below is the default.
-</span>  <span class='comment'># task.module_resourcefiles = [&#39;manifests/**/*.pp&#39;, &#39;lib/**/*.rb&#39;]
-</span><span class='kw'>end</span>
+<pre class="code ruby"><code class="ruby">$ rake strings:generate
 </code></pre>
 
-<p>The <code>strings:gh_pages</code> task will generate your Strings documentation to be made available via <a href="https://pages.github.com/">GitHub Pages</a>. It will:</p>
+<p>The task accepts the following parameters:</p>
+
+<ul>
+<li><code>patterns</code>: the search patterns to use for finding files to document (defaults to <code>manifests/**/*.pp functions/**/*.pp types/**/*.pp lib/**/*.rb</code>).</li>
+<li><code>debug</code>: enables debug output when set to <code>true</code>.</li>
+<li><code>backtrace</code>: enables backtraces for errors when set to <code>true</code>.</li>
+<li><code>markup</code>: the markup language to use (defaults to <code>markdown</code>).</li>
+<li><code>yard_args</code>: additional arguments to pass to YARD.</li>
+</ul>
+
+<p>An example of passing arguments to the <code>strings:generate</code> Rake task:</p>
+
+<pre class="code ruby"><code class="ruby">$ rake strings:generate\['**/*{.pp\,.rb}, true, true, markdown, --readme README.md']
+</code></pre>
+
+<p>The <code>strings:gh_pages:update</code> task will generate your Puppet Strings documentation to be made available via <a href="https://pages.github.com/">GitHub Pages</a>. It will:</p>
 
 <ol>
 <li>Create a <code>doc</code> directory in the root of your project</li>
 <li>Check out the <code>gh-pages</code> branch of the current repository in the <code>doc</code> directory (it will create a branch if one does not already exist)</li>
 <li>Generate strings documentation using the <code>strings:generate</code> task</li>
-<li>Commit the changes and push them to the <code>gh-pages</code> branch <strong>with the <code>-f</code> flag</strong></li>
+<li>Commit the changes and push them to the <code>gh-pages</code> branch <strong>with the <code>--force</code> flag</strong></li>
 </ol>
 
-<p>This task aims to keep the <code>gh-pages</code> branch up to date with the current code and uses the <code>-f</code> flag when pushing to the <code>gh-pages</code> branch. Please keep this in mind as it <strong>will be destructive</strong> if not used properly.</p>
+<p>This task aims to keep the <code>gh-pages</code> branch up to date with the current code and uses the <code>-f</code> flag when pushing to the <code>gh-pages</code> branch.
+<strong><em>Please note this operation will be destructive if not used properly.</em></strong></p>
 
 <h2>Developing and Contributing</h2>
 
-<p>We love contributions from the community! If you&#39;d like to contribute to the strings module, check out <a href="https://github.com/puppetlabs/puppet-strings/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> to get information on the contribution process.</p>
+<p>We love contributions from the community!</p>
+
+<p>If you&#39;d like to contribute to the strings module, check out <a href="https://github.com/puppetlabs/puppet-strings/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> to get information on the contribution process.</p>
 
 <h2>Running Specs</h2>
 
-<p>If you&#39;re going to be doing any development with puppet strings, it&#39;s essential that you can run the spec tests. You should simply have to do the following:</p>
+<p>If you plan on developing features or fixing bugs in Puppet Strings, it is essential that you run specs before opening a pull request.</p>
+
+<p>To run specs, simply execute the <code>spec</code> rake task:</p>
 
 <pre class="code ruby"><code class="ruby">$ bundle install --path .bundle/gems
 $ bundle exec rake spec
@@ -313,24 +440,22 @@ $ bundle exec rake spec
 
 <h2>Support</h2>
 
-<p>Please log tickets and issues at our <a href="https://tickets.puppetlabs.com/browse/PDOC">JIRA tracker</a>. A <a href="https://groups.google.com/forum/?fromgroups#!forum/puppet-users">mailing list</a> is available for asking questions and getting help from others. In addition there is an active #puppet channel on Freenode.</p>
+<p>Please log tickets and issues at our <a href="https://tickets.puppetlabs.com/browse/PDOC">JIRA tracker</a>. A <a href="https://groups.google.com/forum/?fromgroups#!forum/puppet-users">mailing list</a>
+is available for asking questions and getting help from others.</p>
 
-<p>We use semantic version numbers for our releases, and recommend that users stay as up-to-date as possible by upgrading to patch releases and minor releases as they become available.</p>
+<p>There is also an active #puppet channel on the Freenode IRC network.</p>
 
-<p>Bugfixes and ongoing development will occur in minor releases for the current major version. Security fixes will be backported to a previous major version on a best-effort basis, until the previous major version is no longer maintained.</p>
+<p>We use semantic version numbers for our releases, and recommend that users stay as up-to-date as possible by upgrading to
+patch releases and minor releases as they become available.</p>
 
-<h2>Caveats</h2>
-
-<ul>
-<li><p>Documentation blocks must immediately precede the documented code with no whitespace.  This is because the comment extractor possesses the elegance and intelligence of a bag of hammers.</p></li>
-<li><p>This project is very much a work in progress and may very well have undiscovered bugs and pitfalls. If you discover any of these, <a href="https://tickets.puppetlabs.com/browse/PDOC">please file a ticket</a>.</p></li>
-</ul>
+<p>Bug fixes and ongoing development will occur in minor releases for the current major version.
+Security fixes will be ported to a previous major version on a best-effort basis, until the previous major version is no longer maintained.</p>
 </div></div>
 
       <div id="footer">
-  Generated on Sun Sep 11 14:30:25 2016 by
+  Generated on Mon Sep 19 10:17:00 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.5 (ruby-2.2.5).
+  0.9.5 (ruby-1.9.3).
 </div>
 
     </div>

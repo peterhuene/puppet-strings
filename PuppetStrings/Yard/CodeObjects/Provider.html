@@ -71,12 +71,14 @@
   <dl>
     <dt>Inherits:</dt>
     <dd>
-      <span class="inheritName">YARD::CodeObjects::NamespaceObject</span>
+      <span class="inheritName"><span class='object_link'><a href="Base.html" title="PuppetStrings::Yard::CodeObjects::Base (class)">Base</a></span></span>
       
         <ul class="fullTree">
           <li>Object</li>
           
             <li class="next">YARD::CodeObjects::NamespaceObject</li>
+          
+            <li class="next"><span class='object_link'><a href="Base.html" title="PuppetStrings::Yard::CodeObjects::Base (class)">Base</a></span></li>
           
             <li class="next">PuppetStrings::Yard::CodeObjects::Provider</li>
           
@@ -440,6 +442,17 @@
   
 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Base.html" title="PuppetStrings::Yard::CodeObjects::Base (class)">Base</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Base.html#new-class_method" title="PuppetStrings::Yard::CodeObjects::Base.new (method)">new</a></span></p>
+
   <div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
   
@@ -502,13 +515,13 @@
       <pre class="lines">
 
 
-27
 28
 29
-30</pre>
+30
+31</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/code_objects/provider.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/code_objects/provider.rb', line 28</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_type_name'>type_name</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
   <span class='ivar'>@type_name</span> <span class='op'>=</span> <span class='id identifier rubyid_type_name'>type_name</span>
@@ -551,12 +564,12 @@
       <pre class="lines">
 
 
-21
 22
-23</pre>
+23
+24</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/code_objects/provider.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/code_objects/provider.rb', line 22</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_commands'>commands</span>
   <span class='ivar'>@commands</span>
@@ -593,12 +606,12 @@
       <pre class="lines">
 
 
-21
 22
-23</pre>
+23
+24</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/code_objects/provider.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/code_objects/provider.rb', line 22</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_confines'>confines</span>
   <span class='ivar'>@confines</span>
@@ -635,12 +648,12 @@
       <pre class="lines">
 
 
-21
 22
-23</pre>
+23
+24</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/code_objects/provider.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/code_objects/provider.rb', line 22</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_defaults'>defaults</span>
   <span class='ivar'>@defaults</span>
@@ -677,12 +690,12 @@
       <pre class="lines">
 
 
-21
 22
-23</pre>
+23
+24</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/code_objects/provider.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/code_objects/provider.rb', line 22</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_features'>features</span>
   <span class='ivar'>@features</span>
@@ -719,12 +732,12 @@
       <pre class="lines">
 
 
-21
 22
-23</pre>
+23
+24</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/code_objects/provider.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/code_objects/provider.rb', line 22</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_type_name'>type_name</span>
   <span class='ivar'>@type_name</span>
@@ -800,14 +813,14 @@
       <pre class="lines">
 
 
-71
 72
 73
 74
-75</pre>
+75
+76</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/code_objects/provider.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/code_objects/provider.rb', line 72</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_command'>add_command</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_key'>key</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_value'>value</span>
@@ -878,14 +891,14 @@
       <pre class="lines">
 
 
-42
 43
 44
 45
-46</pre>
+46
+47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/code_objects/provider.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/code_objects/provider.rb', line 43</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_confine'>add_confine</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_key'>key</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_value'>value</span>
@@ -956,14 +969,14 @@
       <pre class="lines">
 
 
-61
 62
 63
 64
-65</pre>
+65
+66</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/code_objects/provider.rb', line 61</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/code_objects/provider.rb', line 62</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_default'>add_default</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_key'>key</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_value'>value</span>
@@ -1019,14 +1032,14 @@
       <pre class="lines">
 
 
-51
 52
 53
 54
-55</pre>
+55
+56</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/code_objects/provider.rb', line 51</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/code_objects/provider.rb', line 52</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_feature'>add_feature</span><span class='lparen'>(</span><span class='id identifier rubyid_feature'>feature</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_feature'>feature</span>
@@ -1080,7 +1093,6 @@
       <pre class="lines">
 
 
-79
 80
 81
 82
@@ -1091,14 +1103,17 @@
 87
 88
 89
-90</pre>
+90
+91
+92</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/code_objects/provider.rb', line 79</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/code_objects/provider.rb', line 80</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_hash'>to_hash</span>
   <span class='id identifier rubyid_hash'>hash</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='id identifier rubyid_hash'>hash</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_name'>name</span>
+  <span class='id identifier rubyid_hash'>hash</span><span class='lbracket'>[</span><span class='symbol'>:type_name</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_type_name'>type_name</span>
   <span class='id identifier rubyid_hash'>hash</span><span class='lbracket'>[</span><span class='symbol'>:file</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_file'>file</span>
   <span class='id identifier rubyid_hash'>hash</span><span class='lbracket'>[</span><span class='symbol'>:line</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_line'>line</span>
   <span class='id identifier rubyid_hash'>hash</span><span class='lbracket'>[</span><span class='symbol'>:docstring</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='const'>PuppetStrings</span><span class='op'>::</span><span class='const'>Json</span><span class='period'>.</span><span class='id identifier rubyid_docstring_to_hash'>docstring_to_hash</span><span class='lparen'>(</span><span class='id identifier rubyid_docstring'>docstring</span><span class='rparen'>)</span>
@@ -1155,12 +1170,12 @@
       <pre class="lines">
 
 
-34
 35
-36</pre>
+36
+37</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/code_objects/provider.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/code_objects/provider.rb', line 35</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_type'>type</span>
   <span class='symbol'>:puppet_provider</span>
@@ -1175,9 +1190,9 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Sep 11 14:30:27 2016 by
+  Generated on Mon Sep 19 10:17:03 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.5 (ruby-2.2.5).
+  0.9.5 (ruby-1.9.3).
 </div>
 
     </div>

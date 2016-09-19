@@ -115,7 +115,7 @@
 
 </div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
-  <p class="children"><span class='object_link'><a href="Class.html" title="PuppetStrings::Yard::CodeObjects::Class (class)">Class</a></span>, <span class='object_link'><a href="DefinedType.html" title="PuppetStrings::Yard::CodeObjects::DefinedType (class)">DefinedType</a></span>, <span class='object_link'><a href="Function.html" title="PuppetStrings::Yard::CodeObjects::Function (class)">Function</a></span>, <span class='object_link'><a href="Group.html" title="PuppetStrings::Yard::CodeObjects::Group (class)">Group</a></span>, <span class='object_link'><a href="Type.html" title="PuppetStrings::Yard::CodeObjects::Type (class)">Type</a></span></p>
+  <p class="children"><span class='object_link'><a href="Class.html" title="PuppetStrings::Yard::CodeObjects::Class (class)">Class</a></span>, <span class='object_link'><a href="DefinedType.html" title="PuppetStrings::Yard::CodeObjects::DefinedType (class)">DefinedType</a></span>, <span class='object_link'><a href="Function.html" title="PuppetStrings::Yard::CodeObjects::Function (class)">Function</a></span>, <span class='object_link'><a href="Group.html" title="PuppetStrings::Yard::CodeObjects::Group (class)">Group</a></span>, <span class='object_link'><a href="Provider.html" title="PuppetStrings::Yard::CodeObjects::Provider (class)">Provider</a></span>, <span class='object_link'><a href="Type.html" title="PuppetStrings::Yard::CodeObjects::Type (class)">Type</a></span></p>
 </div>
 
 
@@ -252,7 +252,7 @@
       <pre class="code"><span class="info file"># File 'lib/puppet-strings/yard/code_objects/base.rb', line 6</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
-  <span class='comment'># Skip the super class&#39; implementation because it detects :: in names and this will cause namespaces in the output we don&#39;t want
+  <span class='comment'># Skip the super class' implementation because it detects :: in names and this will cause namespaces in the output we don't want
 </span>  <span class='id identifier rubyid_object'>object</span> <span class='op'>=</span> <span class='const'>Object</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_instance_method'>instance_method</span><span class='lparen'>(</span><span class='symbol'>:new</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_bind'>bind</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_existing'>existing</span> <span class='op'>=</span> <span class='const'>YARD</span><span class='op'>::</span><span class='const'>Registry</span><span class='period'>.</span><span class='id identifier rubyid_at'>at</span><span class='lparen'>(</span><span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_object'>object</span> <span class='op'>=</span> <span class='id identifier rubyid_existing'>existing</span> <span class='kw'>if</span> <span class='id identifier rubyid_existing'>existing</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_existing'>existing</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>==</span> <span class='kw'>self</span>
@@ -269,9 +269,9 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Sep 11 14:30:26 2016 by
+  Generated on Mon Sep 19 10:17:01 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.5 (ruby-2.2.5).
+  0.9.5 (ruby-1.9.3).
 </div>
 
     </div>
